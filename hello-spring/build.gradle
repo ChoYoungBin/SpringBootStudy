@@ -15,7 +15,7 @@ repositories {
 dependencies {
 	//html변환을 위한 dependency
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	//WebApplication 개발을 위한 Srping dependency
+	//WebApplication 개발을 위한 Spring dependency
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
