@@ -1,32 +1,27 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
+@SpringBootTest
+@Transactional
+public class MemberServiceIT {
 
-    private MemoryMemberRepository mockMemberRepository;
+    @Autowired
     private MemberService mockMemberService;
-
-    @BeforeEach
-    public void beforeEach(){
-        mockMemberRepository = new MemoryMemberRepository();
-        //DI (dependency Injection)
-        mockMemberService = new MemberService(mockMemberRepository);
-    }
-
-    @AfterEach
-    void cleanUp(){
-        mockMemberRepository.clearStore();
-    }
 
     @Test
     void test_join_returnsMemberId() throws SQLException {
@@ -36,9 +31,11 @@ class MemberServiceTest {
 
         //when
         Long join = mockMemberService.join(member);
+        Member member1 = mockMemberService.findOne(join).get();
+
 
         //then
-        assertThat(join).isEqualTo(1L);
+        assertThat(member.getName()).isEqualTo(member1.getName());
     }
 
     @Test
