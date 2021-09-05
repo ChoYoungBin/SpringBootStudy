@@ -59,7 +59,7 @@ class HelloSpringApplicationTests {
         mockmemberRepository.save(member2);
 
 
-        List<Member> responselist = mockmemberRepository.findByAll();
+        List<Member> responselist = mockmemberRepository.findAll();
 
 
         assertThat(responselist.size()).isEqualTo(2);

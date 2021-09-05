@@ -11,5 +11,5 @@ public interface MemberRepository {
     Member save(Member member) throws SQLException;
     Optional<Member> findById(Long id);
     Optional<Member> findByName(String name);
-    List<Member> findByAll();
+    List<Member> findAll();
 }
