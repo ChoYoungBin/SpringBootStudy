@@ -3,6 +3,7 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -22,6 +23,8 @@ public class MemberService {
      * @param member
      * @return
      */
+    
+    @Transactional
     public Long join(Member member) throws SQLException {
         validateDuplicatedMember(member);
         Member savedMember = memberRepository.save(member);
