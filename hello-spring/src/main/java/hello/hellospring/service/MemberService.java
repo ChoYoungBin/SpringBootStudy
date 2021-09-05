@@ -1,18 +1,19 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
 
-    private final MemoryMemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberService(MemoryMemberRepository memberRepository){
+    public MemberService(MemberRepository memberRepository){
 
         this.memberRepository = memberRepository;
     }
@@ -21,7 +22,7 @@ public class MemberService {
      * @param member
      * @return
      */
-    public Long join(Member member){
+    public Long join(Member member) throws SQLException {
         validateDuplicatedMember(member);
         Member savedMember = memberRepository.save(member);
 
